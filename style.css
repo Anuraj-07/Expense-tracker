@@ -1,0 +1,364 @@
+/* =========================================================
+   Personal Ledger – classic, premium styling
+   Palette: deep green, brass, ivory, ink, burgundy
+   ========================================================= */
+
+:root {
+  --green-deep: #0f2e26;
+  --green-mid: #1b4a3c;
+  --brass: #b38b4d;
+  --brass-dark: #8f6b34;
+  --paper: #f5f6f2;
+  --white: #ffffff;
+  --ink: #1e2a27;
+  --muted: #5f6d68;
+  --line: #dcd8cc;
+  --burgundy: #8c2f39;
+
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-body: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--paper);
+  color: var(--ink);
+  line-height: 1.55;
+}
+
+/* ---------- Header / masthead ---------- */
+.masthead {
+  background: var(--green-deep);
+  color: var(--paper);
+  padding: 2.25rem 0 5.5rem;
+  border-bottom: 4px solid var(--brass);
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 2rem;
+  letter-spacing: 0.02em;
+  margin: 0;
+}
+
+.brand-tagline {
+  margin: 0.15rem 0 0;
+  color: #b9c7c1;
+  font-size: 1rem;
+}
+
+.total-label {
+  margin: 1.5rem 0 0;
+  color: #b9c7c1;
+  font-size: 1.05rem;
+}
+
+/* The big total is the one memorable element on the page */
+.total-figure {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(3.2rem, 9vw, 5.5rem);
+  line-height: 1.05;
+  margin: 0;
+  color: #e4c791;
+  font-feature-settings: "lnum" 1;
+  word-break: break-word;
+}
+
+.stat-row {
+  border-left: 1px solid rgba(255, 255, 255, 0.18);
+  padding-left: 0.5rem;
+}
+
+.stat-label {
+  margin: 0;
+  color: #b9c7c1;
+  font-size: 0.9rem;
+}
+
+.stat-value {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  font-feature-settings: "lnum" 1;
+}
+
+/* ---------- Main area: overlaps the header slightly ---------- */
+.main-area {
+  margin-top: -3rem;
+  padding-bottom: 3rem;
+}
+
+.panel {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 1.75rem;
+  box-shadow: 0 6px 20px rgba(15, 46, 38, 0.08);
+}
+
+.panel-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--green-deep);
+  margin-bottom: 1.25rem;
+}
+
+/* ---------- Forms ---------- */
+.form-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.form-control,
+.form-select {
+  border: 1px solid #c9c4b5;
+  border-radius: 3px;
+  background-color: #fdfdfb;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--brass);
+  box-shadow: 0 0 0 0.2rem rgba(179, 139, 77, 0.3);
+}
+
+/* Error text: always visible words, never colour alone */
+.invalid-feedback {
+  color: var(--burgundy);
+  font-weight: 600;
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+  border-color: var(--burgundy);
+  background-image: none;
+  padding-right: 0.75rem;
+}
+
+.form-message {
+  margin: 0.9rem 0 0;
+  min-height: 1.5rem;
+  color: var(--green-mid);
+  font-weight: 600;
+}
+
+/* ---------- Buttons ---------- */
+.btn-brass {
+  background: var(--green-deep);
+  color: #f1e3c4;
+  border: 1px solid var(--brass);
+  border-radius: 3px;
+  padding: 0.65rem 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn-brass:hover,
+.btn-brass:focus-visible {
+  background: var(--brass);
+  color: var(--green-deep);
+  border-color: var(--brass);
+}
+
+.btn-outline-ledger {
+  color: var(--green-deep);
+  border: 1px solid var(--green-deep);
+  border-radius: 3px;
+  background: transparent;
+}
+
+.btn-outline-ledger:hover,
+.btn-outline-ledger:focus-visible {
+  background: var(--green-deep);
+  color: #f1e3c4;
+}
+
+.btn:focus-visible,
+.form-select:focus-visible,
+.form-control:focus-visible {
+  outline: 3px solid var(--brass);
+  outline-offset: 2px;
+}
+
+.btn-delete {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--burgundy);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 3px;
+}
+
+.btn-delete:hover,
+.btn-delete:focus-visible {
+  border-color: var(--burgundy);
+  background: #f8eceb;
+}
+
+/* ---------- Category breakdown bars ---------- */
+.break-row {
+  margin-bottom: 1rem;
+}
+
+.break-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.98rem;
+  margin-bottom: 0.3rem;
+}
+
+.break-name {
+  font-weight: 600;
+}
+
+.break-amount {
+  font-variant-numeric: tabular-nums;
+}
+
+.break-percent {
+  color: var(--muted);
+  margin-left: 0.4rem;
+}
+
+.break-track {
+  height: 10px;
+  background: #ebe8de;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.break-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--green-mid), var(--brass));
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* ---------- Ledger table ---------- */
+.ledger-table {
+  margin-bottom: 0;
+  font-size: 0.98rem;
+}
+
+.ledger-table thead th {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--green-deep);
+  border-bottom: 2px solid var(--green-deep);
+  white-space: nowrap;
+}
+
+.ledger-table tbody td {
+  border-bottom: 1px solid var(--line);
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+
+.ledger-table tbody tr:hover td {
+  background: #faf8f2;
+}
+
+.cell-date {
+  white-space: nowrap;
+  color: var(--muted);
+}
+
+.cell-amount {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge-cat {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border: 1px solid var(--brass);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: var(--brass-dark);
+  background: #fbf6ec;
+  white-space: nowrap;
+}
+
+/* Accounting-style total: single rule above, double rule below */
+.ledger-table tfoot th,
+.ledger-table tfoot td {
+  border-top: 1px solid var(--green-deep);
+  border-bottom: 4px double var(--green-deep);
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+}
+
+.ledger-table tfoot th {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--green-deep);
+}
+
+.grand-total {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.4rem;
+  font-feature-settings: "lnum" 1;
+  white-space: nowrap;
+}
+
+/* ---------- Empty state ---------- */
+.empty-state {
+  text-align: center;
+  padding: 2rem 1rem 0.5rem;
+}
+
+.empty-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--green-deep);
+  margin-bottom: 0.25rem;
+}
+
+.empty-text {
+  color: var(--muted);
+  max-width: 46ch;
+  margin: 0 auto 1rem;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  background: var(--green-deep);
+  color: #b9c7c1;
+  text-align: center;
+  padding: 1.25rem 0;
+  font-size: 0.92rem;
+  border-top: 4px solid var(--brass);
+}
+
+/* ---------- Responsive tweaks ---------- */
+@media (max-width: 575.98px) {
+  .panel {
+    padding: 1.25rem;
+  }
+
+  .masthead {
+    padding-bottom: 4.5rem;
+  }
+
+  .stat-value {
+    font-size: 1.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

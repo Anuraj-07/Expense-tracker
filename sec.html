@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Personal Ledger – Expense Tracker</title>
+
+  <!-- Bootstrap 5 (layout, grid, forms, table) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Fonts: Cormorant Garamond for headings and figures, Source Sans 3 for text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Our own styling -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ HEADER + TOTAL ============ -->
+  <header class="masthead">
+    <div class="container">
+      <div class="brand">
+        <h1 class="brand-name">Personal Ledger</h1>
+        <p class="brand-tagline">A quiet place to account for every rupee.</p>
+      </div>
+
+      <div class="row align-items-end g-4 mt-2">
+        <div class="col-lg-6">
+          <p class="total-label">Total spent</p>
+          <p class="total-figure" id="totalSpent" aria-live="polite">₹0.00</p>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="row g-3 stat-row">
+            <div class="col-4">
+              <p class="stat-label">Entries</p>
+              <p class="stat-value" id="statCount">0</p>
+            </div>
+            <div class="col-4">
+              <p class="stat-label">Largest expense</p>
+              <p class="stat-value" id="statLargest">–</p>
+            </div>
+            <div class="col-4">
+              <p class="stat-label">Top category</p>
+              <p class="stat-value" id="statTopCategory">–</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main class="container main-area">
+    <div class="row g-4">
+
+      <!-- ---------- LEFT: ADD EXPENSE FORM ---------- -->
+      <section class="col-lg-4">
+        <div class="panel">
+          <h2 class="panel-title">Record an expense</h2>
+
+          <form id="expenseForm" novalidate>
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" class="form-control" id="title" maxlength="60" placeholder="e.g. Canteen lunch">
+              <div class="invalid-feedback" id="titleError"></div>
+            </div>
+
+            <div class="mb-3">
+              <label for="amount" class="form-label">Amount (₹)</label>
+              <input type="number" class="form-control" id="amount" step="0.01" placeholder="0.00" inputmode="decimal">
+              <div class="invalid-feedback" id="amountError"></div>
+            </div>
+
+            <div class="mb-3">
+              <label for="category" class="form-label">Category</label>
+              <select class="form-select" id="category">
+                <!-- options are added by script.js -->
+              </select>
+              <div class="invalid-feedback" id="categoryError"></div>
+            </div>
+
+            <div class="mb-4">
+              <label for="date" class="form-label">Date</label>
+              <input type="date" class="form-control" id="date">
+              <div class="invalid-feedback" id="dateError"></div>
+            </div>
+
+            <button type="submit" class="btn btn-brass w-100">Add expense</button>
+            <p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <!-- ---------- RIGHT: SUMMARY + TABLE ---------- -->
+      <div class="col-lg-8">
+
+        <!-- Category-wise totals -->
+        <section class="panel mb-4">
+          <h2 class="panel-title">Where the money goes</h2>
+          <div id="breakdown">
+            <!-- category bars are drawn by script.js -->
+          </div>
+        </section>
+
+        <!-- Expense list -->
+        <section class="panel">
+          <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-3">
+            <h2 class="panel-title mb-0">Expense register</h2>
+
+            <div class="d-flex align-items-end gap-2">
+              <div>
+                <label for="filterCategory" class="form-label mb-1">Show</label>
+                <select class="form-select form-select-sm" id="filterCategory"></select>
+              </div>
+              <button type="button" class="btn btn-outline-ledger btn-sm" id="clearAllBtn">Clear all</button>
+            </div>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table ledger-table align-middle">
+              <thead>
+                <tr>
+                  <th scope="col">Date</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Category</th>
+                  <th scope="col" class="text-end">Amount</th>
+                  <th scope="col" class="text-end"><span class="visually-hidden">Actions</span></th>
+                </tr>
+              </thead>
+              <tbody id="expenseBody">
+                <!-- rows are drawn by script.js -->
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th scope="row" colspan="3" id="footLabel">Total (all categories)</th>
+                  <td class="text-end grand-total" id="footTotal">₹0.00</td>
+                  <td></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <!-- Shown when there is nothing to display -->
+          <div class="empty-state" id="emptyState" hidden>
+            <p class="empty-title" id="emptyTitle">Your ledger is empty.</p>
+            <p class="empty-text" id="emptyText">Record your first expense using the form, or load a few sample entries to see how it works.</p>
+            <button type="button" class="btn btn-outline-ledger btn-sm" id="sampleBtn">Load sample entries</button>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="mb-0">Built with HTML, CSS, JavaScript and Bootstrap 5. Your entries are saved only in this browser.</p>
+      <p> ~ Developed by Anuraj.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
