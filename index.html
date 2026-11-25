@@ -18,6 +18,31 @@
 </head>
 <body>
 
+  <!-- ===== SPLASH SCREEN ===== -->
+<div class="splash" id="splash" role="status" aria-live="polite">
+  <div class="splash-coins" aria-hidden="true">
+    <span class="coin" style="left:12%; animation-delay:0s;">₹</span>
+    <span class="coin" style="left:28%; animation-delay:1.6s;">₹</span>
+    <span class="coin" style="left:45%; animation-delay:0.8s;">₹</span>
+    <span class="coin" style="left:62%; animation-delay:2.4s;">₹</span>
+    <span class="coin" style="left:78%; animation-delay:0.4s;">₹</span>
+    <span class="coin" style="left:90%; animation-delay:1.9s;">₹</span>
+  </div>
+
+  <div class="splash-inner">
+    <div class="splash-title-wrap">
+  <p class="splash-title">Spend Smart</p>
+  <span class="splash-line" aria-hidden="true"></span>
+</div>
+    <p class="splash-amount" id="splashAmount">₹0</p>
+    <p class="splash-caption">Every rupee, accounted for.</p>
+    <div class="splash-bar"><div class="splash-bar-fill"></div></div>
+    <p class="splash-status" id="splashStatus">Opening your ledger...</p>
+  </div>
+
+  <button type="button" class="splash-skip" id="splashSkip">Skip</button>
+</div>
+
   <!-- ============ HEADER + TOTAL ============ -->
   <header class="masthead">
     <div class="container">

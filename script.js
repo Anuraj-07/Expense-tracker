@@ -8,6 +8,68 @@
    ========================================================= */
 
 // ---------- 1. Basic data ----------
+/* ===== SPLASH SCREEN (put at the very top of script.js) ===== */
+(function runSplash() {
+  const splash = document.getElementById("splash");
+  if (!splash) return;
+
+  const amountEl = document.getElementById("splashAmount");
+  const statusEl = document.getElementById("splashStatus");
+  const skipBtn = document.getElementById("splashSkip");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const TOTAL_TIME = reduceMotion ? 1500 : 6500; // how long the splash stays (ms)
+  let closed = false;
+
+  document.body.classList.add("splash-active");
+
+  // Status messages that change while loading
+  const messages = [
+    { at: 0, text: "Opening your ledger..." },
+    { at: 1800, text: "Sorting your categories..." },
+    { at: 3600, text: "Counting every rupee..." },
+    { at: 5200, text: "All set. Welcome!" }
+  ];
+  messages.forEach(function (m) {
+    setTimeout(function () {
+      statusEl.textContent = m.text;
+    }, m.at);
+  });
+
+  // Rupee counter that counts up
+  const target = 24580;
+  const countStart = 1200;
+  const countTime = 4500;
+  const startedAt = performance.now();
+
+  function tick(now) {
+    if (closed) return;
+    const elapsed = now - startedAt - countStart;
+    if (elapsed < 0) {
+      requestAnimationFrame(tick);
+      return;
+    }
+    const progress = Math.min(elapsed / countTime, 1);
+    const eased = 1 - Math.pow(1 - progress, 3); // slows down near the end
+    amountEl.textContent = "₹" + Math.round(target * eased).toLocaleString("en-IN");
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  function closeSplash() {
+    if (closed) return;
+    closed = true;
+    splash.classList.add("hide");
+    document.body.classList.remove("splash-active");
+    setTimeout(function () {
+      splash.remove();
+    }, 900);
+  }
+
+  setTimeout(closeSplash, TOTAL_TIME);
+  skipBtn.addEventListener("click", closeSplash);
+})();
+
 const STORAGE_KEY = "personalLedgerExpenses";
 
 const CATEGORIES = [
